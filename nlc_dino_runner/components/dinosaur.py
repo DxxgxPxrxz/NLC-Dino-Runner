@@ -20,7 +20,7 @@ class Dinosaur(Sprite):
         self.dino_jump = False
         self.jump_vel = self.JUMP_VEL
 
-        pass
+
 
     def update(self, user_input):
         if self.dino_jump:
@@ -72,7 +72,7 @@ class Dinosaur(Sprite):
             self.jump_vel = self.JUMP_VEL
 
     def draw(self, screen):
-        screen.blit(self.image,(self.dino_rect.x,self.dino_rect.y))
-        pass
+        screen.blit(self.image, (self.dino_rect.x, self.dino_rect.y))
+
 
 #Clase 3: Dino
