@@ -58,5 +58,52 @@ class Game:
         if self.x_pos_bg <= -image_width:
             self.screen.blit(BG, (self.x_pos_bg + image_width, self.y_pos_bg))
             self.x_pos_bg = 0
-
         self.x_pos_bg -= self.game_speed
+
+    def execute(self):
+        while self.running:
+            if not self.playing:
+                self.show_menu()
+
+    def show_menu(self):
+        self.running = True
+
+        white_color = (255, 255, 255)
+        self.screen.fill(white_color)
+
+
+        #futuramente vamos a mostrar el menu
+        self.print_menu_elements()
+
+        pygame.display.update()
+
+        self.handle_key_events_on_menu()
+
+    def handle_key_events_on_menu(self):
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                self.running = False
+                self.playing = False
+                pygame.display.quit()
+                pygame.quit()
+                exit()
+
+            if event.type == pygame.KEYDOWN:
+                self.run()
+
+    def print_menu_elements(self):
+        half_screen_height = SCREEN_HEIGHT // 2
+        death_score, death_score_rect = text_utils.get_centered_message("Death count: " + str(self.death_count),height=half_screen_height + 50)
+        points, points_rect = text_utils.get_centered_message('Points: ' + str(self.points),height=half_screen_height + 100)
+
+        if self.death_count == 0:
+            text, text_rect = text_utils.get_centered_message('Press any key to Start')
+            self.screen.blit(text, text_rect)
+        else:
+            text, text_rect = text_utils.get_centered_message('Press any key to Restart')
+            self.screen.blit(text, text_rect)
+
+        self.screen.blit(points, points_rect)
+        self.screen.blit(death_score, death_score_rect)
+        self.screen.blit(ICON, ((SCREEN_WIDTH // 2) - 40, (half_screen_height - 150)))
+
