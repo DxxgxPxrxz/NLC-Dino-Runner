@@ -1,7 +1,7 @@
 import pygame.time
 
 from nlc_dino_runner.components.obstacles.cactus import Cactus
-from nlc_dino_runner.utils.constants import SMALL_CACTUS
+from nlc_dino_runner.utils.constants import CACTUS
 
 
 class ObstaclesManager:
@@ -10,7 +10,7 @@ class ObstaclesManager:
 
     def update(self, game):
         if len(self.obstacles_list) == 0:
-            self.obstacles_list.append(Cactus(SMALL_CACTUS))
+            self.obstacles_list.append(Cactus(CACTUS))
 
         for obstacle in self.obstacles_list:
             obstacle.update(game.game_speed, self.obstacles_list)
