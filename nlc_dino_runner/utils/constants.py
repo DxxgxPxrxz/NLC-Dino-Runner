@@ -5,7 +5,7 @@ import os
 TITLE = "Dino Runner"
 SCREEN_HEIGHT = 600
 SCREEN_WIDTH = 1100
-FPS = 30
+FPS = 35
 IMG_DIR = os.path.join(os.path.dirname(__file__), "..", "assets")
 
 # Assets Constants
@@ -44,12 +44,10 @@ DUCKING_HAMMER = [
     pygame.image.load(os.path.join(IMG_DIR, "Dino/DinoDuck2.png")),
 ]
 
-SMALL_CACTUS = [
+CACTUS = [
     pygame.image.load(os.path.join(IMG_DIR, "Cactus/SmallCactus1.png")),
     pygame.image.load(os.path.join(IMG_DIR, "Cactus/SmallCactus2.png")),
     pygame.image.load(os.path.join(IMG_DIR, "Cactus/SmallCactus3.png")),
-]
-LARGE_CACTUS = [
     pygame.image.load(os.path.join(IMG_DIR, "Cactus/LargeCactus1.png")),
     pygame.image.load(os.path.join(IMG_DIR, "Cactus/LargeCactus2.png")),
     pygame.image.load(os.path.join(IMG_DIR, "Cactus/LargeCactus3.png")),
@@ -69,3 +67,5 @@ BG = pygame.image.load(os.path.join(IMG_DIR, 'Other/Track.png'))
 HEART = pygame.image.load(os.path.join(IMG_DIR, 'Other/SmallHeart.png'))
 
 DEFAULT_TYPE = "default"
+
+#Clase 3: Dino
