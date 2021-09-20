@@ -4,7 +4,6 @@ from nlc_dino_runner.utils.constants import SCREEN_WIDTH #Importando constantes
 #Clase padre
 
 
-
 class Obstacles(Sprite):
 
     def __init__(self, image, obstacle_type):

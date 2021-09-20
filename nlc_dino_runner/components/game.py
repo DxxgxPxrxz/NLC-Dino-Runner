@@ -3,6 +3,7 @@
 import pygame #Esta es la libreria principal para el programa, es utilizada frecuentemente en otros files
 
 #Importando del folder components:
+from nlc_dino_runner.components.powerups.power_up_manager import PowerUpManager
 from nlc_dino_runner.utils import text_utils
 from nlc_dino_runner.components.dinosaur import Dinosaur #Importando una class desde un Python File proveniente de la carpeta COMPONENTS (en este caso la class llamada "Dinosaur")
 from nlc_dino_runner.components.obstacles.obstaclesManager import ObstaclesManager# //
@@ -19,16 +20,20 @@ class Game:
         self.playing = False
         self.x_pos_bg = 0
         self.y_pos_bg = 380
-        self.game_speed = 20
+        self.game_speed = 30
         self.player = Dinosaur()
         self.obstacle_manager = ObstaclesManager()
+        self.power_up_manager = PowerUpManager()
         self.points = 0
         self.running = True
         self.death_count = 0
 
 
+
     def run(self): #Metodo principal de la clase, se encarga de hacer funcionar el codigo entero
         self.obstacle_manager.reset_obstacles()
+        self.power_up_manager.reset_power_ups(self.points)
+        self.game_speed = 30
         self.points = 0
         self.playing = True
         while self.playing:
@@ -47,7 +52,7 @@ class Game:
         user_input = pygame.key.get_pressed()
         self.player.update(user_input)
         self.obstacle_manager.update(self)
-
+        self.power_up_manager.update(self.points, self.game_speed, self.player)
 
     def draw(self):
         self.clock.tick(FPS)
@@ -56,8 +61,7 @@ class Game:
         self.draw_background()
         self.player.draw(self.screen)
         self.obstacle_manager.draw(self.screen)
-
-
+        self.power_up_manager.draw(self.screen)
         pygame.display.update()
         pygame.display.flip()
 
@@ -113,13 +117,21 @@ class Game:
                 self.run()
 
     def print_menu_elements(self):
+
         half_screen_height = SCREEN_HEIGHT // 2
+        death_score, death_score_rect = text_utils.get_centered_message("Death count: " + str(self.death_count), height=half_screen_height + 50)
+        points, points_rect = text_utils.get_centered_message("Your score: " + str(self.points), height=half_screen_height + 100)
 
-        text, text_rect = text_utils.get_centered_message('Press any key to Start')
-        self.screen.blit(text, text_rect)
+        if self.death_count == 0:
+            text, text_rect = text_utils.get_centered_message('Press any key to Start')
 
-        death_score, death_score_rect = text_utils.get_centered_message("Death count: " + str(self.death_count), height= half_screen_height + 50)
-        self.screen.blit(death_score, death_score_rect)
+        else:
+            text, text_rect = text_utils.get_centered_message('Press any key to Restart')
 
         self.screen.blit(ICON, ((SCREEN_WIDTH // 2) - 40, (half_screen_height - 150)))
+
+        self.screen.blit(text, text_rect)
+        self.screen.blit(death_score, death_score_rect)
+        self.screen.blit(points, points_rect)
+        self.screen.blit(points, points_rect)
 

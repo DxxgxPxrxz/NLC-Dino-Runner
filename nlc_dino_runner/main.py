@@ -5,4 +5,4 @@ from nlc_dino_runner.components.game import Game #Importando una class desde un 
 
 if __name__ == "__main__": #El __name__ se convierte en __main__ mientras el archivo principal es ejecutado
     game = Game() #Definiendo la var game como objeto, con la class importada Game, para correr el juego
-    game.execute() 
+    game.execute()
