@@ -9,7 +9,7 @@ class Live(Sprite):
         self.rect.x = POS_X
         self.rect.y = 30
 
-    def draw_live(self, screen):
-        screen.blit(self.image,(self.rect.x, self.rect.y))
+    def draw(self, screen):
+        screen.blit(self.image, (self.rect.x, self.rect.y))
 
 
