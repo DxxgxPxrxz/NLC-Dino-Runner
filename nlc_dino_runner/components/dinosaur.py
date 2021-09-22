@@ -1,5 +1,7 @@
 import pygame
 from pygame.sprite import Sprite
+
+from nlc_dino_runner.utils import text_utils
 from nlc_dino_runner.utils.constants import (
     RUNNING,
     DUCKING,
@@ -90,19 +92,32 @@ class Dinosaur(Sprite):
     def jump(self):
         self.image = self.jump_img[self.type]
         if self.dino_jump:
-            self.dino_rect.y -= self.jump_vel * 6
-            self.jump_vel -= 1
-
+            self.dino_rect.y -= self.jump_vel * 4
+            self.jump_vel -= 0.8
         if self.jump_vel < -self.JUMP_VEL:
             self.dino_rect.y = self.Y_POS
             self.dino_jump = False
             self.jump_vel = self.JUMP_VEL
 
-    #def check_invincibility(self, screen):
-    #    if self.shield:
-    #        time_to_show = round((self.shield_time_up - pygame.time.get_ticks()) / 1000, 3)
-    #        if time_to_show > 0:
-    #            self.show_text
+    def check_invincibility(self, screen):
+        if self.shield:
+            time_to_show = round((self.shield_time_up - pygame.time.get_ticks()) / 1000, 2)
+            #0.24
+            if time_to_show < 0:
+                self.shield = False
+                if self.type == SHIELD_TYPE:
+                    self.type = DEFAULT_TYPE
+            else:
+                if self.show_text:
+                    text, text_rect = text_utils.get_centered_message(
+                        f'Shield enabled for {time_to_show}',
+                        width=500,
+                        height=40,
+                        size=20
+                    )
+                    screen.blit(text, text_rect)
+
+
 
 
 

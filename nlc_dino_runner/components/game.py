@@ -3,11 +3,13 @@
 import pygame #Esta es la libreria principal para el programa, es utilizada frecuentemente en otros files
 
 #Importando del folder components:
+from nlc_dino_runner.components.lifes.life import Live
 from nlc_dino_runner.components.powerups.power_up_manager import PowerUpManager
 from nlc_dino_runner.utils import text_utils
 from nlc_dino_runner.components.dinosaur import Dinosaur #Importando una class desde un Python File proveniente de la carpeta COMPONENTS (en este caso la class llamada "Dinosaur")
 from nlc_dino_runner.components.obstacles.obstaclesManager import ObstaclesManager# //
 from nlc_dino_runner.utils.constants import RUNNING, TITLE, ICON, SCREEN_WIDTH, SCREEN_HEIGHT, BG, FPS#Importando constantes
+
 
 
 class Game:
@@ -19,6 +21,7 @@ class Game:
         self.screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
         self.playing = False
         self.x_pos_bg = 0
+        self.lives = Live()
         self.y_pos_bg = 380
         self.game_speed = 30
         self.player = Dinosaur()
@@ -27,8 +30,6 @@ class Game:
         self.points = 0
         self.running = True
         self.death_count = 0
-
-
 
     def run(self): #Metodo principal de la clase, se encarga de hacer funcionar el codigo entero
         self.obstacle_manager.reset_obstacles()
@@ -41,7 +42,6 @@ class Game:
             self.update()
             self.draw()
         #pygame.quit()
-
 
     def event(self):
         for event in pygame.event.get():
@@ -71,7 +71,7 @@ class Game:
             self.game_speed += 1
         score_element, score_element_rect = text_utils.get_score_element(self.points)
         self.screen.blit(score_element, score_element_rect)
-
+        self.player.check_invincibility(self.screen)
 
     def draw_background(self):
 
@@ -134,4 +134,5 @@ class Game:
         self.screen.blit(death_score, death_score_rect)
         self.screen.blit(points, points_rect)
         self.screen.blit(points, points_rect)
+
 
