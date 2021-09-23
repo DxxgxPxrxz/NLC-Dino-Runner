@@ -9,8 +9,8 @@ from nlc_dino_runner.components.powerups.power_up_manager import PowerUpManager
 from nlc_dino_runner.utils import text_utils
 from nlc_dino_runner.components.dinosaur import Dinosaur #Importando una class desde un Python File proveniente de la carpeta COMPONENTS (en este caso la class llamada "Dinosaur")
 from nlc_dino_runner.components.obstacles.obstaclesManager import ObstaclesManager# //
-from nlc_dino_runner.utils.constants import RUNNING, TITLE, ICON, SCREEN_WIDTH, SCREEN_HEIGHT, BG, FPS#Importando constantes
-
+from nlc_dino_runner.utils.constants import RUNNING, TITLE, ICON, SCREEN_WIDTH, SCREEN_HEIGHT, BG, FPS, GAME_THEME#Importando constantes #AÑADIDO
+from nlc_dino_runner.components.hammer import Hammer
 
 
 class Game:
@@ -34,13 +34,14 @@ class Game:
         self.running = True
         self.death_count = 0
 
-    def run(self): #Metodo principal de la clase, se encarga de hacer funcionar el codigo entero
+    def run(self):
         self.obstacle_manager.reset_obstacles()
         self.power_up_manager.reset_power_ups(self.points)
         self.live_manager.reset_lives()
         self.game_speed = 30
         self.points = 0
         self.playing = True
+        GAME_THEME.play()#AÑADIDO
         while self.playing:
             self.event()
             self.update()
@@ -77,6 +78,7 @@ class Game:
         score_element, score_element_rect = text_utils.get_score_element(self.points)
         self.screen.blit(score_element, score_element_rect)
         self.player.check_invincibility(self.screen)
+        #self.player.check_hammer(self.screen)
 
     def draw_background(self):
 
@@ -94,6 +96,7 @@ class Game:
         while self.running:
             if not self.playing:
                 self.show_menu()
+                GAME_THEME.stop()#AÑADIDO
 
     def show_menu(self):
         self.running = True

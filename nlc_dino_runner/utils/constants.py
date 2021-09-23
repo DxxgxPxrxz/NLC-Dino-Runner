@@ -1,7 +1,9 @@
 import pygame
 import os
+from pygame import mixer#AÑADIDO
 
 # Global Constants
+pygame.mixer.init()#AÑADIDO
 TITLE = "Dino Runner"
 SCREEN_HEIGHT = 600
 SCREEN_WIDTH = 1100
@@ -68,5 +70,11 @@ HEART = pygame.image.load(os.path.join(IMG_DIR, 'Other/SmallHeart.png'))
 
 DEFAULT_TYPE = "default"
 SHIELD_TYPE = "shield"
+HAMMER_TYPE = "hammer"#AÑADIDO
 
 #Clase 3: Dino
+
+GAME_THEME = mixer.Sound('Game theme.wav')#AÑADIDO
+HIT_SOUND = mixer.Sound('Hit sound effect.wav')#AÑADIDO
+POWER_UP_SOUND = mixer.Sound('Shield sound effect.wav')#AÑADIDO
+GAME_OVER_SOUND = mixer.Sound('Game over sound effect.wav')#AÑADIDO
