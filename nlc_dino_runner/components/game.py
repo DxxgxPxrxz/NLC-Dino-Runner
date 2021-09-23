@@ -10,7 +10,7 @@ from nlc_dino_runner.utils import text_utils
 from nlc_dino_runner.components.dinosaur import Dinosaur #Importando una class desde un Python File proveniente de la carpeta COMPONENTS (en este caso la class llamada "Dinosaur")
 from nlc_dino_runner.components.obstacles.obstaclesManager import ObstaclesManager# //
 from nlc_dino_runner.utils.constants import RUNNING, TITLE, ICON, SCREEN_WIDTH, SCREEN_HEIGHT, BG, FPS, GAME_THEME#Importando constantes #AÑADIDO
-from nlc_dino_runner.components.hammer import Hammer
+
 
 
 class Game:

@@ -1,6 +1,6 @@
-from nlc_dino_runner.components import dinosaur
+
 from nlc_dino_runner.components.lives.lives import Live
-from nlc_dino_runner.components.dinosaur import Dinosaur
+
 
 class LiveManager:
 

@@ -1,6 +1,5 @@
 import random
 
-from nlc_dino_runner.components import dinosaur
 import pygame.time
 from nlc_dino_runner.components.obstacles.bird import Bird
 from nlc_dino_runner.components.obstacles.cactus import Cactus
@@ -38,7 +37,8 @@ class ObstaclesManager:
                         game.death_count += 1
                         GAME_OVER_SOUND.play() #AÑADIDO
                         break
-
+            elif game.player.hammer.rect.colliderect(obstacle.rect):#AÑADIDO
+                self.obstacles_list.remove(obstacle)
 
     def draw(self, screen):
         for obstacle in self.obstacles_list:

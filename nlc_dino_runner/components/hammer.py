@@ -8,9 +8,9 @@ class Hammer(Sprite):
         Sprite.__init__(self)
         self.image = HAMMER
         self.rect = self.image.get_rect()
-        self.rect.x = RECT_X
+        self.rect.x = RECT_X + 30
         self.rect.y = RECT_Y
-        self.hammer_speed = 1
+        self.hammer_speed = 40
 
     def update(self):
         self.rect.x += self.hammer_speed

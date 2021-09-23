@@ -18,7 +18,7 @@ class PowerUpManager:
     def reset_power_ups(self, points):
         self.power_ups = []
         self.points = points
-        self.when_appears = random.randint(100, 110) + self.points
+        self.when_appears = random.randint(200, 300) + self.points
 
     def generate_power_ups(self, points):
         self.points = points
@@ -26,7 +26,7 @@ class PowerUpManager:
             if self.when_appears == self.points:
                 print("generating powerup")
                 self.when_appears = random.randint(self.when_appears + 200, 500 + self.when_appears)
-                if random.randint(0, 10) < 1:#AÑADIDO RANDOM RANDINT
+                if random.randint(0, 1) == 0:#AÑADIDO RANDOM RANDINT
                     self.power_ups.append(Shield())
                 else:
                     self.power_ups.append(HammerPowerUp())
@@ -54,10 +54,6 @@ class PowerUpManager:
                     time_random = random.randrange(5, 8)
                     player.shield_time_up = power_up.start_time + (time_random * 1000)
                     self.power_ups.remove(power_up)
-
-
-
-
 
 
 
