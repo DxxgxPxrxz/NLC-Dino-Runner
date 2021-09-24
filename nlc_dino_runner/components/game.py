@@ -9,7 +9,8 @@ from nlc_dino_runner.components.powerups.power_up_manager import PowerUpManager
 from nlc_dino_runner.utils import text_utils
 from nlc_dino_runner.components.dinosaur import Dinosaur #Importando una class desde un Python File proveniente de la carpeta COMPONENTS (en este caso la class llamada "Dinosaur")
 from nlc_dino_runner.components.obstacles.obstaclesManager import ObstaclesManager# //
-from nlc_dino_runner.utils.constants import RUNNING, TITLE, ICON, SCREEN_WIDTH, SCREEN_HEIGHT, BG, FPS, GAME_THEME#Importando constantes #AÑADIDO
+from nlc_dino_runner.utils.constants import RUNNING, TITLE, ICON, SCREEN_WIDTH, SCREEN_HEIGHT, BG, FPS, GAME_THEME, \
+    DARK_MODE, NORMAL_MODE, CLOUD  # Importando constantes #AÑADIDO
 
 
 
@@ -56,20 +57,24 @@ class Game:
     def update(self):
         user_input = pygame.key.get_pressed()
         self.player.update(user_input)
-        self.obstacle_manager.update(self)
+        self.obstacle_manager.update(self, self.screen)
         self.power_up_manager.update(self.points, self.game_speed, self.player)
 
     def draw(self):
         self.clock.tick(FPS)
-        self.screen.fill((255, 255, 255))
         self.score()
         self.draw_background()
+        self.draw_sky()
         self.player.draw(self.screen)
         self.obstacle_manager.draw(self.screen)
         self.power_up_manager.draw(self.screen)
         self.live_manager.draw(self.screen)
         pygame.display.update()
         pygame.display.flip()
+        if (self.points // 1000) % 2 == 1:
+            self.screen.fill(DARK_MODE)
+        else:
+            self.screen.fill(NORMAL_MODE)
 
     def score(self):
         self.points += 1
@@ -91,6 +96,16 @@ class Game:
             self.screen.blit(BG, (self.x_pos_bg + image_width, self.y_pos_bg))
             self.x_pos_bg = 0
         self.x_pos_bg -= self.game_speed
+
+    def draw_sky(self):
+
+        image_width = CLOUD.get_width()
+        self.screen.blit(CLOUD, (self.x_pos_bg + 1100, self.y_pos_bg - 200))
+        self.screen.blit(CLOUD, (self.x_pos_bg, self.y_pos_bg))
+        if self.x_pos_bg > +image_width:
+            self.screen.blit(CLOUD, (self.x_pos_bg + 1100, self.y_pos_bg))
+            self.x_pos_bg = 0
+        self.x_pos_bg += self.game_speed - 30
 
     def execute(self):
         while self.running:

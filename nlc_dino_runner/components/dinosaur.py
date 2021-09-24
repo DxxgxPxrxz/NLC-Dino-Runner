@@ -16,7 +16,8 @@ from nlc_dino_runner.utils.constants import (
     JUMPING_HAMMER, #AÑADIDO
     DEFAULT_TYPE,
     SHIELD_TYPE,
-    HAMMER_TYPE #AÑADIDO
+    HAMMER_TYPE,#AÑADIDO
+    DINO_DEAD#AÑADIDO
 )
 
 class Dinosaur(Sprite):
@@ -45,6 +46,7 @@ class Dinosaur(Sprite):
         self.type = DEFAULT_TYPE
         self.image = self.run_img[self.type][0]
         self.hammer_image = HAMMER
+        self.dead_img = DINO_DEAD
 
         self.shield = False
         self.shield_time_up = 0
@@ -60,7 +62,7 @@ class Dinosaur(Sprite):
         self.dino_jump = False
         self.jump_vel = self.JUMP_VEL
 
-        self.hammer = Hammer(1000, self.dino_rect.y)#AÑADIDO
+        self.hammer = None #AÑADIDO
         self.hammer_available = False
         self.hammer_time_up = 0
         self.show_hammer_text = False
@@ -99,7 +101,6 @@ class Dinosaur(Sprite):
 
         if self.hammer:
             self.hammer.update()
-
 
 
         if self.step_index >= 10:
@@ -155,31 +156,17 @@ class Dinosaur(Sprite):
                     )
                     screen.blit(text, text_rect)
 
-    def check_hammer(self, screen):
-        if self.hammer_available:
-            time_to_show = round((self.hammer_time_up - pygame.time.get_ticks()) / 1000, 2)
-            if time_to_show < 0:
-                self.hammer_available = False
-                if self.type == HAMMER_TYPE:  # or self.type == HAMMER_TYPE: #AÑADIDO VOLVER A DEFAULT TYPE EN POWERUPS
-                    self.type = DEFAULT_TYPE
-            else:
-                if self.show_hammer_text and self.type == HAMMER_TYPE:
-                    text, text_rect = text_utils.get_centered_message(
-                        f'Hammer enabled for {time_to_show} seg',
-                        width=500,
-                        height=40,
-                        size=20
-                    )
-                    screen.blit(text, text_rect)
-
-
-
 
     def draw(self, screen):
         screen.blit(self.image, (self.dino_rect.x, self.dino_rect.y))
         if self.hammer:
             self.hammer.draw(screen)
 
+    def draw_dead(self, screen):
+        self.image = self.dead_img
+        self.dino_rect.x = self.X_POS
+        self.dino_rect.y = self.Y_POS
+        screen.blit(self.image, (self.dino_rect.x, self.dino_rect.y))
 
 
 #Clase 3: Dino

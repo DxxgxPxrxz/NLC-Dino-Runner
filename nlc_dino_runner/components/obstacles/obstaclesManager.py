@@ -11,7 +11,7 @@ class ObstaclesManager:
     def __init__(self):
         self.obstacles_list = []
 
-    def update(self, game):
+    def update(self, game, screen):
         if len(self.obstacles_list) == 0:
             if random.randint(0, 1) == 0:
                 self.obstacles_list.append(Cactus(CACTUS))
@@ -32,12 +32,13 @@ class ObstaclesManager:
                         game.player.shield_time_up = start_time + 1000
 
                     else:
-                        pygame.time.delay(1000)
+                        game.player.draw_dead(screen)
+                        pygame.time.delay(500)
                         game.playing = False
+                        GAME_OVER_SOUND.play()
                         game.death_count += 1
-                        GAME_OVER_SOUND.play() #AÑADIDO
                         break
-            elif game.player.hammer.rect.colliderect(obstacle.rect):#AÑADIDO
+            elif game.player.hammer and game.player.hammer.rect.colliderect(obstacle.rect):#AÑADIDO
                 self.obstacles_list.remove(obstacle)
 
     def draw(self, screen):

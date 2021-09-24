@@ -47,6 +47,7 @@ class PowerUpManager:
                     player.shield_time_up = power_up.start_time + (time_random * 1000)
                     self.power_ups.remove(power_up)
                 elif power_up.type == HAMMER_TYPE:
+                    POWER_UP_SOUND.play()
                     player.hammer_available = True
                     player.show_hammer_text = True
                     player.type = power_up.type

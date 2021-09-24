@@ -23,8 +23,8 @@ RUNNING_SHIELD = [
 ]
 
 RUNNING_HAMMER = [
-    pygame.image.load(os.path.join(IMG_DIR, "Dino/DinoDuck1Hammer.png")),
-    pygame.image.load(os.path.join(IMG_DIR, "Dino/DinoRun2.png")),
+    pygame.image.load(os.path.join(IMG_DIR, "Dino/DinoRun1Hammer.png")),
+    pygame.image.load(os.path.join(IMG_DIR, "Dino/DinoRun2Hammer1.png")),
 ]
 
 JUMPING = pygame.image.load(os.path.join(IMG_DIR, "Dino/DinoJump.png"))
@@ -65,7 +65,7 @@ SHIELD = pygame.image.load(os.path.join(IMG_DIR, 'Other/shield.png'))
 HAMMER = pygame.image.load(os.path.join(IMG_DIR, 'Other/hammer.png'))
 
 BG = pygame.image.load(os.path.join(IMG_DIR, 'Other/Track.png'))
-
+DINO_DEAD = pygame.image.load(os.path.join(IMG_DIR,'Dino/DinoDead.png'))
 HEART = pygame.image.load(os.path.join(IMG_DIR, 'Other/SmallHeart.png'))
 
 DEFAULT_TYPE = "default"
@@ -78,3 +78,6 @@ GAME_THEME = mixer.Sound('Game theme.wav')#AÑADIDO
 HIT_SOUND = mixer.Sound('Hit sound effect.wav')#AÑADIDO
 POWER_UP_SOUND = mixer.Sound('Shield sound effect.wav')#AÑADIDO
 GAME_OVER_SOUND = mixer.Sound('Game over sound effect.wav')#AÑADIDO
+
+DARK_MODE = (0, 0, 0)
+NORMAL_MODE = (250, 250, 250)
